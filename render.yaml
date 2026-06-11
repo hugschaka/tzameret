@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: tzameret
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
