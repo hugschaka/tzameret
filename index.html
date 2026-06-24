@@ -11,14 +11,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --primary: #0e7c86;
-    --primary-dark: #0a5d65;
-    --primary-light: #e6f4f5;
+    --primary: #1f3a5f;
+    --primary-dark: #15304d;
+    --primary-light: #eaeff5;
     --ink: #1f2937;
     --muted: #6b7280;
     --line: #e5e7eb;
-    --bg: #f8fafb;
-    --green: #1a9b59;
+    --bg: #f7f9fb;
+    --green: #2f9e6a;
     --amber: #c2792a;
     --blue: #1c4e9b;
     --shadow: 0 1px 3px rgba(0,0,0,.07), 0 8px 24px rgba(0,0,0,.06);
@@ -47,7 +47,7 @@
   .hero p.sub { margin-top: 18px; font-size: 19px; color: var(--muted); max-width: 34em; }
   .cta-row { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
   .btn { display: inline-block; padding: 13px 28px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: .15s; }
-  .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(14,124,134,.35); }
+  .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(31,58,95,.32); }
   .btn-primary:hover { background: var(--primary-dark); }
   .btn-ghost { background: #fff; color: var(--primary-dark); border: 1.5px solid var(--line); }
   .btn-ghost:hover { border-color: var(--primary); }
@@ -100,7 +100,7 @@
   .plans { display: grid; grid-template-columns: repeat(2, minmax(0, 420px)); gap: 26px; margin-top: 46px; justify-content: center; }
   @media (max-width: 760px) { .plans { grid-template-columns: 1fr; } }
   .plan { border: 1.5px solid var(--line); border-radius: 18px; padding: 32px 28px; background: #fff; }
-  .plan.hot { border-color: var(--primary); box-shadow: 0 8px 30px rgba(14,124,134,.12); position: relative; }
+  .plan.hot { border-color: var(--primary); box-shadow: 0 8px 30px rgba(31,58,95,.13); position: relative; }
   .plan.hot::before { content: "המסלול המומלץ"; position: absolute; top: -13px; right: 24px; background: var(--primary); color: #fff; font-size: 12.5px; font-weight: 700; padding: 3px 14px; border-radius: 999px; }
   .plan h3 { font-size: 20px; font-weight: 800; }
   .plan p.desc { color: var(--muted); font-size: 14.5px; margin-top: 6px; min-height: 44px; }
@@ -126,7 +126,7 @@
 
 <nav>
   <div class="wrap nav-inner">
-    <a class="logo" href="#"><svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0e7c86"/><circle cx="32" cy="17" r="9.5" fill="#fff"/><circle cx="22" cy="26" r="9.5" fill="#fff"/><circle cx="42" cy="26" r="9.5" fill="#fff"/><rect x="29" y="33" width="6" height="16" rx="2" fill="#fff"/><rect x="20" y="51" width="24" height="3" rx="1.5" fill="#fff" opacity="0.55"/></svg> צמרת</a>
+    <a class="logo" href="#"><svg width="30" height="34" viewBox="0 0 64 72" aria-hidden="true"><defs><linearGradient id="tzgnav" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#57b07d"/><stop offset="0.55" stop-color="#2e8a78"/><stop offset="1" stop-color="#1f3a5f"/></linearGradient></defs><path d="M32 5 L40 21 L45 14 L52 29 L59 65 L5 65 Z" fill="url(#tzgnav)"/><path d="M26 65 C24 52 40 49 35 37 C32 28 28 29 31 19 L35 19 C32 29 41 31 39 41 C37 53 31 54 33 65 Z" fill="#fff" opacity="0.95"/><path d="M23.5 60.5 C23.5 56.5 26.5 55.5 29.5 55.5 L34.5 55.5 C37.5 55.5 40.5 56.5 40.5 60.5 L40.5 61.6 C40.5 62.6 39.6 63 38.6 63 L25.4 63 C24.4 63 23.5 62.6 23.5 61.6 Z" fill="#fff" stroke="#1f3a5f" stroke-width="0.8"/><circle cx="28" cy="63" r="1.9" fill="#1f3a5f"/><circle cx="36" cy="63" r="1.9" fill="#1f3a5f"/></svg> צמרת</a>
     <div class="nav-links">
       <a href="#how">איך זה עובד</a>
       <a href="#features">יתרונות</a>
@@ -246,6 +246,9 @@
 <footer>
   צמרת © 2026 · מערכת קליטת תלמידים לבתי ספר לנהיגה
 </footer>
+
+<!-- עוזר צ'אט צמרת (מכירות / אונבורדינג) -->
+<script src="https://tzameret-reflactor.onrender.com/widget.js" data-audience="prospect"></script>
 
 </body>
 </html>
