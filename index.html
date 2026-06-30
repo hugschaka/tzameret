@@ -46,8 +46,8 @@
   .hero h1 em { color: var(--primary); font-style: normal; }
   .hero p.sub { margin-top: 18px; font-size: 19px; color: var(--muted); max-width: 34em; }
   .cta-row { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn { display: inline-block; padding: 13px 28px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: .15s; }
-  .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(31,58,95,.32); }
+  .btn { display: inline-block; padding: 13px 28px; border-radius: 12px; font-size: 16px; font-weight: 600; text-decoration: none; transition: .15s; cursor: pointer; font-family: inherit; }
+  .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 14px rgba(31,58,95,.32); border: none; }
   .btn-primary:hover { background: var(--primary-dark); }
   .btn-ghost { background: #fff; color: var(--primary-dark); border: 1.5px solid var(--line); }
   .btn-ghost:hover { border-color: var(--primary); }
@@ -143,7 +143,7 @@
       <p class="sub">צמרת מתממשקת למערכת ברוש של משרד התחבורה, מזהה כל תלמיד חדש שנרשם לבית הספר, שולחת לו הודעה אישית עם קישור לתשלום — ועוקבת אחרי התהליך עד לחשבונית. בלי אקסלים, בלי טלפונים, בלי לשכוח אף אחד.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://github.com/hugschaka/tzameret/releases/latest/download/TzameretSetup.exe">📥 הורדת האפליקציה</a>
-        <a class="btn btn-ghost" href="#contact">תיאום הדגמה</a>
+        <a class="btn btn-ghost" href="#plans" onclick="openLead('');return false;">תיאום הדגמה</a>
         <a class="btn btn-ghost" href="#how">איך זה עובד?</a>
       </div>
     </div>
@@ -205,30 +205,32 @@
     <p class="sec-sub">בחרו את מה שמתאים לבית הספר שלכם</p>
     <div class="plans">
       <div class="plan">
-        <h3>סליקה בלבד</h3>
-        <p class="desc">לבתי ספר שכבר עובדים עם מערכת חשבוניות משלהם וממשיכים להפיק בה.</p>
+        <h3>בייס</h3>
+        <p class="desc">האוטומציה שחוסכת את העבודה הידנית — ואתם ממשיכים לגבות איך שנוח לכם.</p>
         <ul>
-          <li>סנכרון תלמידים מברוש</li>
-          <li>SMS אוטומטי + תזכורות</li>
-          <li>קישורי תשלום מאובטחים</li>
-          <li>דשבורד מעקב מלא</li>
+          <li>סנכרון תלמידים חדשים מברוש</li>
+          <li>הודעת SMS אוטומטית לכל תלמיד — עם הלינק שאתם בוחרים</li>
+          <li>דשבורד מעקב וניהול סטטוסים</li>
+          <li>מסך ניהול מורים וחישוב אחוזים</li>
+          <li class="no">סליקה וזיהוי תשלום אוטומטי</li>
           <li class="no">חשבונית אוטומטית</li>
         </ul>
-        <div class="price">תמחור חודשי קבוע — בתיאום</div>
-        <a class="btn btn-ghost" href="#contact">דברו איתנו</a>
+        <div class="price">תמחור חודשי + לפי תלמידים חדשים — בתיאום</div>
+        <button class="btn btn-ghost" onclick="openLead('בייס')">השאירו פרטים</button>
       </div>
       <div class="plan hot">
-        <h3>סליקה + חשבוניות</h3>
-        <p class="desc">הפתרון המלא: תשלום, חשבונית ומעקב — הכל אוטומטי מקצה לקצה.</p>
+        <h3>מקס</h3>
+        <p class="desc">הפתרון המלא: מההרשמה ועד החשבונית — הכל אוטומטי, בלי שתיגעו.</p>
         <ul>
-          <li>כל מה שבמסלול סליקה</li>
-          <li>חשבונית אוטומטית על כל תשלום</li>
-          <li>שליחת החשבונית ללקוח במייל</li>
-          <li>התאמה מלאה לרשויות המס</li>
+          <li>כל מה שבמסלול בייס</li>
+          <li>קישור תשלום מאובטח אוטומטי בכל הודעה</li>
+          <li>זיהוי תשלום אוטומטי ← "קליטה הסתיימה"</li>
+          <li>חשבונית אוטומטית ונשלחת ללקוח</li>
+          <li>תזכורות תשלום + הודעות למורה</li>
           <li>ליווי והקמה מלאים</li>
         </ul>
-        <div class="price">תמחור חודשי קבוע — בתיאום</div>
-        <a class="btn btn-primary" href="#contact">תיאום הדגמה</a>
+        <div class="price">תמחור חודשי + לפי תלמידים חדשים — בתיאום</div>
+        <button class="btn btn-primary" onclick="openLead('מקס')">השאירו פרטים</button>
       </div>
     </div>
     <p class="custom-note">צריכים התממשקות למערכת חשבוניות קיימת (חשבשבת, iCount ועוד)? אפשרי בהתאמה אישית — דברו איתנו.</p>
@@ -239,7 +241,7 @@
   <div class="wrap">
     <h2>רוצים לראות את זה על בית הספר שלכם?</h2>
     <p>הדגמה קצרה על הנתונים האמיתיים שלכם — בלי התחייבות.</p>
-    <a class="btn" href="mailto:danielrozner11@gmail.com?subject=תיאום הדגמה — צמרת">תיאום הדגמה</a>
+    <a class="btn" href="mailto:danielrozner11@gmail.com?subject=תיאום הדגמה — צמרת" onclick="openLead('');return false;">תיאום הדגמה</a>
     <a class="mail" href="mailto:danielrozner11@gmail.com">danielrozner11@gmail.com</a>
   </div>
 </section>
@@ -247,6 +249,42 @@
 <footer>
   צמרת © 2026 · מערכת קליטת תלמידים לבתי ספר לנהיגה
 </footer>
+
+<!-- טופס השארת פרטים -->
+<div id="lead-bg" style="display:none;position:fixed;inset:0;background:rgba(21,48,77,.55);z-index:200;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:18px;max-width:400px;width:100%;padding:30px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <h3 style="font-size:21px;font-weight:800;color:var(--primary-dark)">השאירו פרטים <span id="lead-plan" style="color:var(--primary);font-size:16px"></span></h3>
+    <p style="color:var(--muted);font-size:14.5px;margin-top:6px">נחזור אליכם בהקדם להדגמה קצרה, בלי התחייבות.</p>
+    <input id="lead-name" type="text" placeholder="שם מלא" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:16px;font-family:inherit;font-size:15px">
+    <input id="lead-phone" type="tel" placeholder="טלפון" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;font-family:inherit;font-size:15px">
+    <input id="lead-email" type="email" placeholder="אימייל (אופציונלי)" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;font-family:inherit;font-size:15px">
+    <div id="lead-msg" style="font-size:14px;margin-top:10px;min-height:18px"></div>
+    <div style="display:flex;gap:10px;margin-top:14px">
+      <button class="btn btn-primary" id="lead-send" style="flex:1">שליחה</button>
+      <button class="btn btn-ghost" onclick="closeLead()">ביטול</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function(){
+    var LEAD_URL='https://tzameret-reflactor.onrender.com/api/chat/lead', plan='';
+    window.openLead=function(p){ plan=p||''; document.getElementById('lead-plan').textContent=p?('· מסלול '+p):''; document.getElementById('lead-msg').textContent=''; document.getElementById('lead-bg').style.display='flex'; };
+    window.closeLead=function(){ document.getElementById('lead-bg').style.display='none'; };
+    document.getElementById('lead-bg').addEventListener('click',function(e){ if(e.target.id==='lead-bg') closeLead(); });
+    document.getElementById('lead-send').addEventListener('click',async function(){
+      var name=document.getElementById('lead-name').value.trim(), phone=document.getElementById('lead-phone').value.trim(), email=document.getElementById('lead-email').value.trim(), msg=document.getElementById('lead-msg');
+      if(phone.replace(/\D/g,'').length<9){ msg.style.color='#b4232a'; msg.textContent='נא להזין מספר טלפון תקין'; return; }
+      var btn=document.getElementById('lead-send'); btn.disabled=true; btn.textContent='שולח…';
+      try{
+        var r=await fetch(LEAD_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,phone:phone,email:email,plan:plan})});
+        var d=await r.json();
+        if(d.ok){ msg.style.color='#14663c'; msg.textContent='תודה! נחזור אליכם בהקדם ✓'; document.getElementById('lead-name').value='';document.getElementById('lead-phone').value='';document.getElementById('lead-email').value=''; setTimeout(closeLead,1800); }
+        else { msg.style.color='#b4232a'; msg.textContent=d.error||'שגיאה, נסו שוב'; }
+      }catch(e){ msg.style.color='#b4232a'; msg.textContent='שגיאה בשליחה, נסו שוב'; }
+      finally{ btn.disabled=false; btn.textContent='שליחה'; }
+    });
+  })();
+</script>
 
 <!-- עוזר צ'אט צמרת (מכירות / אונבורדינג) -->
 <script src="https://tzameret-reflactor.onrender.com/widget.js" data-audience="prospect"></script>
