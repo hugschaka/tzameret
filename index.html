@@ -120,7 +120,18 @@
   #contact .mail { display: block; margin-top: 18px; color: #d8f0f2; font-size: 15px; text-decoration: none; }
 
   footer { padding: 26px 0; text-align: center; color: var(--muted); font-size: 13.5px; }
+
+  /* ── motion layer (progressive enhancement) ── */
+  .js-anim .hero h1, .js-anim .hero .sub, .js-anim .cta-row .btn, .js-anim .hero .mock { opacity: 0; }
+  .step, .feat, .plan { transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease; }
+  .step:hover, .feat:hover { transform: translateY(-6px); box-shadow: 0 16px 38px rgba(31,58,95,.13); }
+  .plan:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(31,58,95,.15); }
+  .btn { will-change: transform; }
+  nav { transition: box-shadow .3s ease, background .3s ease; }
+  nav.scrolled { box-shadow: 0 6px 24px rgba(31,58,95,.09); background: rgba(255,255,255,.96); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
+<script>document.documentElement.className += ' js-anim';</script>
 </head>
 <body>
 
@@ -284,6 +295,87 @@
       finally{ btn.disabled=false; btn.textContent='שליחה'; }
     });
   })();
+</script>
+
+<!-- ── Motion layer: GSAP + ScrollTrigger + Lenis ── -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var root = document.documentElement;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // graceful fallback — if anything is missing or motion is off, reveal everything and stop
+  if (reduce || !window.gsap || !window.ScrollTrigger || !window.Lenis) { root.classList.remove('js-anim'); return; }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ── smooth scroll (Lenis) wired to GSAP ──
+  var lenis = new Lenis({ duration: 1.1, smoothWheel: true,
+    easing: function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); } });
+  window.lenis = lenis;
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(function(time){ lenis.raf(time * 1000); });
+  gsap.ticker.lagSmoothing(0);
+
+  // smooth anchor links (skip the ones with custom onclick, e.g. lead popup)
+  document.querySelectorAll('a[href^="#"]:not([onclick])').forEach(function(a){
+    var id = a.getAttribute('href');
+    if (id.length < 2) return;
+    a.addEventListener('click', function(e){
+      var el = document.querySelector(id);
+      if (el){ e.preventDefault(); lenis.scrollTo(el, { offset: -70 }); }
+    });
+  });
+
+  // nav shadow on scroll
+  var nav = document.querySelector('nav');
+  lenis.on('scroll', function(e){ nav.classList.toggle('scrolled', e.scroll > 12); });
+
+  // ── hero entrance ──
+  gsap.set(['.hero h1', '.hero .sub', '.cta-row .btn', '.hero .mock'], { opacity: 0 });
+  var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.fromTo('.hero h1',  { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0)
+    .fromTo('.hero .sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, 0.28)
+    .fromTo('.cta-row .btn', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, 0.45)
+    .fromTo('.hero .mock', { y: 30, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.35);
+
+  // ── scroll reveals ──
+  function revealGroup(sel){
+    gsap.utils.toArray(sel).forEach(function(container){
+      var items = container.children;
+      gsap.set(items, { opacity: 0, y: 32 });
+      ScrollTrigger.create({ trigger: container, start: 'top 82%', once: true, onEnter: function(){
+        gsap.to(items, { opacity: 1, y: 0, duration: 0.65, ease: 'power3.out', stagger: 0.1 });
+      }});
+    });
+  }
+  function revealEls(sel, y){
+    gsap.utils.toArray(sel).forEach(function(el){
+      gsap.set(el, { opacity: 0, y: y || 26 });
+      ScrollTrigger.create({ trigger: el, start: 'top 88%', once: true, onEnter: function(){
+        gsap.to(el, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' });
+      }});
+    });
+  }
+  revealEls('.sec-title'); revealEls('.sec-sub');
+  revealGroup('.strip-inner'); revealGroup('.steps'); revealGroup('.feats'); revealGroup('.plans');
+  revealEls('.custom-note');
+  revealEls('#contact h2', 30); revealEls('#contact p'); revealEls('#contact .btn, #contact .mail');
+
+  // hero mock parallax on scroll
+  gsap.to('.hero .mock', { yPercent: -7, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+  // magnetic primary buttons (subtle)
+  document.querySelectorAll('.btn-primary').forEach(function(b){
+    b.addEventListener('mousemove', function(e){
+      var r = b.getBoundingClientRect();
+      gsap.to(b, { x: (e.clientX - r.left - r.width/2) * 0.2, y: (e.clientY - r.top - r.height/2) * 0.35, duration: 0.3 });
+    });
+    b.addEventListener('mouseleave', function(){ gsap.to(b, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1,0.4)' }); });
+  });
+})();
 </script>
 
 <!-- עוזר צ'אט צמרת (מכירות / אונבורדינג) -->
