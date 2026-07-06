@@ -77,6 +77,14 @@
   .sec-title { text-align: center; font-size: 32px; font-weight: 800; letter-spacing: -0.3px; }
   .sec-sub { text-align: center; color: var(--muted); margin-top: 10px; font-size: 17px; }
 
+  /* Demo video */
+  #demo { background: var(--bg); }
+  .demo-frame { max-width: 920px; margin: 42px auto 0; border-radius: 18px; overflow: hidden;
+    box-shadow: 0 18px 60px rgba(31,58,95,.22); border: 1px solid var(--line); background: #0d1d30;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; }
+  .demo-frame:hover { transform: translateY(-4px); box-shadow: 0 26px 70px rgba(31,58,95,.28); }
+  .demo-frame video { display: block; width: 100%; height: auto; }
+
   /* Steps */
   .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 46px; }
   @media (max-width: 860px) { .steps { grid-template-columns: repeat(2, 1fr); } }
@@ -182,6 +190,16 @@
     <span>הנתונים נשארים אצלך</span>
   </div>
 </div>
+
+<section id="demo">
+  <div class="wrap">
+    <h2 class="sec-title">רואים את זה בפעולה</h2>
+    <p class="sec-sub">דקה אחת: מההתחברות לברוש ועד "קליטה הסתיימה" — כולל ההודעות, התשלום והחשבונית</p>
+    <div class="demo-frame">
+      <video src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
+    </div>
+  </div>
+</section>
 
 <section id="how">
   <div class="wrap">
