@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>צמרת — קליטת תלמידים אוטומטית לבתי ספר לנהיגה</title>
+<title>צמרת — ניהול אגרות אוטומטי לבתי ספר לנהיגה</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg">
-<meta name="description" content="צמרת מתממשקת למערכת ברוש, מזהה תלמידים חדשים, שולחת SMS עם קישור תשלום, עוקבת אחר התשלום ומפיקה חשבונית — אוטומטית.">
+<meta name="description" content="ניהול אגרות אוטומטי לבתי ספר לנהיגה: צמרת מתממשקת למערכת ברוש, מזהה תלמידים חדשים, שולחת SMS עם קישור תשלום, עוקבת אחר התשלום ומפיקה חשבונית — אוטומטית.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -25,6 +25,9 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  /* Lenis owns scrolling when active — native smooth-scroll must not fight it (causes jerky slow/fast scroll) */
+  html.lenis, html.lenis body { height: auto; }
+  html.lenis { scroll-behavior: auto !important; }
   body { font-family: 'Heebo', Arial, sans-serif; color: var(--ink); background: #fff; line-height: 1.6; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
 
@@ -77,9 +80,8 @@
   .sec-title { text-align: center; font-size: 32px; font-weight: 800; letter-spacing: -0.3px; }
   .sec-sub { text-align: center; color: var(--muted); margin-top: 10px; font-size: 17px; }
 
-  /* Demo video */
-  #demo { background: var(--bg); }
-  .demo-frame { max-width: 920px; margin: 42px auto 0; border-radius: 18px; overflow: hidden;
+  /* Demo video (hero) */
+  .demo-frame { border-radius: 16px; overflow: hidden;
     box-shadow: 0 18px 60px rgba(31,58,95,.22); border: 1px solid var(--line); background: #0d1d30;
     transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; }
   .demo-frame:hover { transform: translateY(-4px); box-shadow: 0 26px 70px rgba(31,58,95,.28); }
@@ -130,7 +132,7 @@
   footer { padding: 26px 0; text-align: center; color: var(--muted); font-size: 13.5px; }
 
   /* ── motion layer (progressive enhancement) ── */
-  .js-anim .hero h1, .js-anim .hero .sub, .js-anim .cta-row .btn, .js-anim .hero .mock { opacity: 0; }
+  .js-anim .hero h1, .js-anim .hero .sub, .js-anim .cta-row .btn, .js-anim .hero .demo-frame { opacity: 0; }
   .step, .feat, .plan { transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease; }
   .step:hover, .feat:hover { transform: translateY(-6px); box-shadow: 0 16px 38px rgba(31,58,95,.13); }
   .plan:hover { transform: translateY(-5px); box-shadow: 0 18px 44px rgba(31,58,95,.15); }
@@ -158,26 +160,16 @@
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <h1>קליטת תלמידים — מההרשמה בברוש ועד התשלום. <em>אוטומטית.</em></h1>
-      <p class="sub">צמרת מתממשקת למערכת ברוש של משרד התחבורה, מזהה כל תלמיד חדש שנרשם לבית הספר, שולחת לו הודעה אישית עם קישור לתשלום — ועוקבת אחרי התהליך עד לחשבונית. בלי אקסלים, בלי טלפונים, בלי לשכוח אף אחד.</p>
+      <h1>ניהול אגרות <em>אוטומטי.</em></h1>
+      <p class="sub">מהרישום בברוש ועד סיום קליטה בבית הספר — צמרת מזהה כל תלמיד חדש, שולחת לו הודעה אישית עם קישור לתשלום, ועוקבת אחרי התהליך עד לחשבונית. בלי אקסלים, בלי טלפונים, בלי לשכוח אף אחד.</p>
       <div class="cta-row">
         <a class="btn btn-primary" href="https://github.com/hugschaka/tzameret/releases/latest/download/TzameretSetup.exe">📥 הורדת האפליקציה</a>
         <a class="btn btn-ghost" href="#plans" onclick="openLead('');return false;">תיאום הדגמה</a>
         <a class="btn btn-ghost" href="#how">איך זה עובד?</a>
       </div>
     </div>
-    <div class="mock" aria-hidden="true">
-      <div class="mock-bar"><i></i><i></i><i></i></div>
-      <div class="mock-head">תלמידים — היום</div>
-      <table>
-        <thead><tr><th>שם</th><th>מורה</th><th>סטטוס</th></tr></thead>
-        <tbody>
-          <tr><td>נועה פרידמן <span class="tag-new">חדש</span></td><td>משה</td><td><span class="pill wait">ממתין להודעה</span></td></tr>
-          <tr><td>איתי לוי <span class="tag-new">חדש</span></td><td>רונית</td><td><span class="pill sent">קיבל הודעה</span></td></tr>
-          <tr><td>שירה כהן</td><td>משה</td><td><span class="pill done">קליטה הסתיימה</span></td></tr>
-          <tr><td>דניאל ברק</td><td>אבי</td><td><span class="pill done">קליטה הסתיימה</span></td></tr>
-        </tbody>
-      </table>
+    <div class="demo-frame" aria-label="הדגמה: מהתחברות לברוש ועד קליטה הסתיימה">
+      <video src="demo.mp4" poster="demo-poster.jpg" controls muted loop playsinline preload="metadata"></video>
     </div>
   </div>
 </header>
@@ -190,16 +182,6 @@
     <span>הנתונים נשארים אצלך</span>
   </div>
 </div>
-
-<section id="demo">
-  <div class="wrap">
-    <h2 class="sec-title">רואים את זה בפעולה</h2>
-    <p class="sec-sub">דקה אחת: מההתחברות לברוש ועד "קליטה הסתיימה" — כולל ההודעות, התשלום והחשבונית</p>
-    <div class="demo-frame">
-      <video src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline controls preload="metadata"></video>
-    </div>
-  </div>
-</section>
 
 <section id="how">
   <div class="wrap">
@@ -276,7 +258,7 @@
 </section>
 
 <footer>
-  צמרת © 2026 · מערכת קליטת תלמידים לבתי ספר לנהיגה
+  צמרת © 2026 · ניהול אגרות אוטומטי לבתי ספר לנהיגה
 </footer>
 
 <!-- טופס השארת פרטים -->
@@ -351,12 +333,12 @@
   lenis.on('scroll', function(e){ nav.classList.toggle('scrolled', e.scroll > 12); });
 
   // ── hero entrance ──
-  gsap.set(['.hero h1', '.hero .sub', '.cta-row .btn', '.hero .mock'], { opacity: 0 });
+  gsap.set(['.hero h1', '.hero .sub', '.cta-row .btn', '.hero .demo-frame'], { opacity: 0 });
   var tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.fromTo('.hero h1',  { y: 42, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 }, 0)
     .fromTo('.hero .sub', { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, 0.28)
     .fromTo('.cta-row .btn', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, stagger: 0.1 }, 0.45)
-    .fromTo('.hero .mock', { y: 30, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.35);
+    .fromTo('.hero .demo-frame', { y: 30, opacity: 0, scale: 0.97 }, { y: 0, opacity: 1, scale: 1, duration: 1.0 }, 0.35);
 
   // ── scroll reveals ──
   function revealGroup(sel){
@@ -381,8 +363,8 @@
   revealEls('.custom-note');
   revealEls('#contact h2', 30); revealEls('#contact p'); revealEls('#contact .btn, #contact .mail');
 
-  // hero mock parallax on scroll
-  gsap.to('.hero .mock', { yPercent: -7, ease: 'none',
+  // hero video parallax on scroll
+  gsap.to('.hero .demo-frame', { yPercent: -7, ease: 'none',
     scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
   // magnetic primary buttons (subtle)
