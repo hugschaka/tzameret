@@ -21,11 +21,11 @@
 
   function css() {
     return '' +
-    '.tza-btn{position:fixed;bottom:20px;inset-inline-start:20px;z-index:2147483000;width:56px;height:56px;border-radius:50%;' +
+    '.tza-btn{position:fixed;bottom:20px;left:20px;z-index:2147483000;width:56px;height:56px;border-radius:50%;' +
       'border:none;background:#1f3a5f;color:#fff;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.28);display:flex;align-items:center;justify-content:center;transition:transform .15s ease,background .15s ease}' +
     '.tza-btn:hover{transform:translateY(-2px);background:#15304d}' +
     '.tza-btn svg{width:30px;height:30px}' +
-    '.tza-panel{position:fixed;bottom:86px;inset-inline-start:20px;z-index:2147483000;width:300px;max-width:calc(100vw - 40px);' +
+    '.tza-panel{position:fixed;bottom:86px;left:20px;z-index:2147483000;width:300px;max-width:calc(100vw - 40px);' +
       'background:#fff;color:#1f2937;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.25);' +
       'padding:16px;font-family:"Heebo",Arial,sans-serif;direction:rtl;display:none}' +
     '.tza-panel.open{display:block}' +
