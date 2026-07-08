@@ -140,10 +140,26 @@
   nav { transition: box-shadow .3s ease, background .3s ease; }
   nav.scrolled { box-shadow: 0 6px 24px rgba(31,58,95,.09); background: rgba(255,255,255,.96); }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  /* ── accessibility (ת"י 5568 / WCAG 2.1 AA) ── */
+  .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+  .skip { position:absolute; top:-64px; right:16px; z-index:300; background:var(--primary-dark); color:#fff;
+    padding:11px 20px; border-radius:0 0 10px 10px; font-weight:700; font-size:15px; text-decoration:none; transition:top .18s ease; }
+  .skip:focus { top:0; }
+  a:focus-visible, button:focus-visible, input:focus-visible, video:focus-visible, [tabindex]:focus-visible {
+    outline:3px solid var(--primary); outline-offset:3px; border-radius:6px;
+  }
+  .demo-frame { position:relative; }
+  .vid-toggle { position:absolute; bottom:12px; inset-inline-start:12px; z-index:4; width:42px; height:42px; border-radius:50%;
+    border:none; background:rgba(13,29,48,.6); color:#fff; font-size:15px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity .2s ease, background .15s ease; }
+  .demo-frame:hover .vid-toggle, .vid-toggle:focus-visible { opacity:1; }
+  .vid-toggle:hover { background:rgba(13,29,48,.85); }
 </style>
 <script>document.documentElement.className += ' js-anim';</script>
 </head>
 <body>
+<a class="skip" href="#main">דלג לתוכן הראשי</a>
 
 <nav>
   <div class="wrap nav-inner">
@@ -157,6 +173,7 @@
   </div>
 </nav>
 
+<main id="main">
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
@@ -168,8 +185,10 @@
         <a class="btn btn-ghost" href="#how">איך זה עובד?</a>
       </div>
     </div>
-    <div class="demo-frame" aria-label="הדגמה: מהתחברות לברוש ועד קליטה הסתיימה">
-      <video src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" disablepictureinpicture></video>
+    <div class="demo-frame">
+      <video id="demo-video" src="demo.mp4" poster="demo-poster.jpg" autoplay muted loop playsinline preload="auto" disablepictureinpicture
+             aria-label="סרטון הדגמה: מהתחברות לברוש ועד סיום קליטת התלמיד — הודעות, תשלום וחשבונית"></video>
+      <button type="button" id="vid-toggle" class="vid-toggle" aria-label="השהה את סרטון ההדגמה" aria-pressed="false">⏸</button>
     </div>
   </div>
 </header>
@@ -257,31 +276,55 @@
   </div>
 </section>
 
+</main>
+
 <footer>
-  צמרת © 2026 · ניהול אגרות אוטומטי לבתי ספר לנהיגה
+  <div class="wrap">
+    צמרת © 2026 · ניהול אגרות אוטומטי לבתי ספר לנהיגה
+    <span aria-hidden="true"> · </span>
+    <a href="accessibility.html" style="color:var(--primary);font-weight:600;text-decoration:underline">הצהרת נגישות</a>
+  </div>
 </footer>
 
 <!-- טופס השארת פרטים -->
 <div id="lead-bg" style="display:none;position:fixed;inset:0;background:rgba(21,48,77,.55);z-index:200;align-items:center;justify-content:center;padding:20px">
-  <div style="background:#fff;border-radius:18px;max-width:400px;width:100%;padding:30px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
-    <h3 style="font-size:21px;font-weight:800;color:var(--primary-dark)">השאירו פרטים <span id="lead-plan" style="color:var(--primary);font-size:16px"></span></h3>
+  <div role="dialog" aria-modal="true" aria-labelledby="lead-title" style="background:#fff;border-radius:18px;max-width:400px;width:100%;padding:30px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+    <h2 id="lead-title" style="font-size:21px;font-weight:800;color:var(--primary-dark)">השאירו פרטים <span id="lead-plan" style="color:var(--primary);font-size:16px"></span></h2>
     <p style="color:var(--muted);font-size:14.5px;margin-top:6px">נחזור אליכם בהקדם להדגמה קצרה, בלי התחייבות.</p>
-    <input id="lead-name" type="text" placeholder="שם מלא" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:16px;font-family:inherit;font-size:15px">
-    <input id="lead-phone" type="tel" placeholder="טלפון" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;font-family:inherit;font-size:15px">
-    <input id="lead-email" type="email" placeholder="אימייל (אופציונלי)" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;font-family:inherit;font-size:15px">
-    <div id="lead-msg" style="font-size:14px;margin-top:10px;min-height:18px"></div>
+    <label for="lead-name" class="sr-only">שם מלא</label>
+    <input id="lead-name" type="text" placeholder="שם מלא" autocomplete="name" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:16px;font-family:inherit;font-size:15px">
+    <label for="lead-phone" class="sr-only">מספר טלפון</label>
+    <input id="lead-phone" type="tel" placeholder="טלפון" autocomplete="tel" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;font-family:inherit;font-size:15px">
+    <label for="lead-email" class="sr-only">כתובת אימייל (אופציונלי)</label>
+    <input id="lead-email" type="email" placeholder="אימייל (אופציונלי)" autocomplete="email" style="width:100%;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:10px;font-family:inherit;font-size:15px">
+    <div id="lead-msg" role="status" aria-live="polite" style="font-size:14px;margin-top:10px;min-height:18px"></div>
     <div style="display:flex;gap:10px;margin-top:14px">
       <button class="btn btn-primary" id="lead-send" style="flex:1">שליחה</button>
-      <button class="btn btn-ghost" onclick="closeLead()">ביטול</button>
+      <button class="btn btn-ghost" type="button" onclick="closeLead()">ביטול</button>
     </div>
   </div>
 </div>
 <script>
   (function(){
-    var LEAD_URL='https://tzameret-reflactor.onrender.com/api/chat/lead', plan='';
-    window.openLead=function(p){ plan=p||''; document.getElementById('lead-plan').textContent=p?('· מסלול '+p):''; document.getElementById('lead-msg').textContent=''; document.getElementById('lead-bg').style.display='flex'; };
-    window.closeLead=function(){ document.getElementById('lead-bg').style.display='none'; };
-    document.getElementById('lead-bg').addEventListener('click',function(e){ if(e.target.id==='lead-bg') closeLead(); });
+    var LEAD_URL='https://tzameret-reflactor.onrender.com/api/chat/lead', plan='', leadTrigger=null;
+    var bg=document.getElementById('lead-bg');
+    window.openLead=function(p){ plan=p||''; leadTrigger=document.activeElement;
+      document.getElementById('lead-plan').textContent=p?('· מסלול '+p):'';
+      document.getElementById('lead-msg').textContent='';
+      bg.style.display='flex';
+      setTimeout(function(){ document.getElementById('lead-name').focus(); },30); };
+    window.closeLead=function(){ bg.style.display='none'; if(leadTrigger&&leadTrigger.focus){ try{ leadTrigger.focus(); }catch(e){} } };
+    bg.addEventListener('click',function(e){ if(e.target.id==='lead-bg') closeLead(); });
+    // Keyboard: ESC closes, Tab is trapped inside the dialog (WCAG 2.1.2 / 2.4.3).
+    bg.addEventListener('keydown',function(e){
+      if(e.key==='Escape'){ e.preventDefault(); closeLead(); return; }
+      if(e.key!=='Tab') return;
+      var f=[...bg.querySelectorAll('input,button')].filter(function(el){ return !el.disabled; });
+      if(!f.length) return;
+      var first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    });
     document.getElementById('lead-send').addEventListener('click',async function(){
       var name=document.getElementById('lead-name').value.trim(), phone=document.getElementById('lead-phone').value.trim(), email=document.getElementById('lead-email').value.trim(), msg=document.getElementById('lead-msg');
       if(phone.replace(/\D/g,'').length<9){ msg.style.color='#b4232a'; msg.textContent='נא להזין מספר טלפון תקין'; return; }
@@ -295,6 +338,22 @@
       finally{ btn.disabled=false; btn.textContent='שליחה'; }
     });
   })();
+</script>
+
+<!-- ── Demo video: accessible pause/play (WCAG 2.2.2) + reduced-motion ── -->
+<script>
+(function(){
+  var v=document.getElementById('demo-video'), b=document.getElementById('vid-toggle');
+  if(!v||!b) return;
+  function sync(){ var p=v.paused; b.textContent=p?'▶':'⏸';
+    b.setAttribute('aria-pressed', String(p));
+    b.setAttribute('aria-label', p?'הפעל את סרטון ההדגמה':'השהה את סרטון ההדגמה'); }
+  b.addEventListener('click', function(){ if(v.paused){ v.play(); } else { v.pause(); } sync(); });
+  v.addEventListener('play', sync); v.addEventListener('pause', sync);
+  // Respect the OS "reduce motion" setting — don't auto-play looping motion.
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ try{ v.pause(); }catch(e){} }
+  sync();
+})();
 </script>
 
 <!-- ── Motion layer: GSAP + ScrollTrigger + Lenis ── -->

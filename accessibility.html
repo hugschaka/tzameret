@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הצהרת נגישות — צמרת</title>
+<meta name="description" content="הצהרת הנגישות של אתר צמרת — עמידה בתקן הישראלי ת&quot;י 5568 (WCAG 2.1 רמה AA).">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --primary:#1f3a5f; --primary-dark:#15304d; --ink:#1f2937; --muted:#4b5563; --line:#e5e7eb; --bg:#f7f9fb; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Heebo',Arial,sans-serif; color:var(--ink); background:#fff; line-height:1.7; }
+  .skip { position:absolute; top:-64px; right:16px; z-index:300; background:var(--primary-dark); color:#fff; padding:11px 20px; border-radius:0 0 10px 10px; font-weight:700; text-decoration:none; transition:top .18s ease; }
+  .skip:focus { top:0; }
+  a:focus-visible, :focus-visible { outline:3px solid var(--primary); outline-offset:3px; border-radius:6px; }
+  .wrap { max-width:820px; margin:0 auto; padding:0 22px; }
+  header.top { background:linear-gradient(180deg,#eaeff5,#fff); border-bottom:1px solid var(--line); padding:22px 0; }
+  header.top .home { display:inline-flex; align-items:center; gap:10px; color:var(--primary-dark); text-decoration:none; font-weight:800; font-size:20px; }
+  main { padding:40px 0 64px; }
+  h1 { font-size:34px; font-weight:800; letter-spacing:-.4px; margin-bottom:8px; }
+  .updated { color:var(--muted); font-size:15px; margin-bottom:28px; }
+  h2 { font-size:21px; font-weight:700; color:var(--primary-dark); margin:30px 0 10px; }
+  p { margin-bottom:12px; font-size:16.5px; }
+  ul { margin:8px 26px 16px; }
+  li { margin-bottom:7px; font-size:16px; }
+  a { color:var(--primary); }
+  .box { background:var(--bg); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin-top:14px; }
+  .box a { font-weight:700; }
+  footer { border-top:1px solid var(--line); padding:22px 0; text-align:center; color:var(--muted); font-size:14px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">דלג לתוכן הראשי</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="home" href="index.html">
+      <svg width="26" height="30" viewBox="0 0 64 72" aria-hidden="true"><defs><linearGradient id="tzg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#57b07d"/><stop offset="0.55" stop-color="#2e8a78"/><stop offset="1" stop-color="#1f3a5f"/></linearGradient></defs><path d="M32 5 L40 21 L45 14 L52 29 L59 65 L5 65 Z" fill="url(#tzg)"/><path d="M26 65 C24 52 40 49 35 37 C32 28 28 29 31 19 L35 19 C32 29 41 31 39 41 C37 53 31 54 33 65 Z" fill="#fff" opacity="0.95"/></svg>
+      צמרת
+    </a>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <h1>הצהרת נגישות</h1>
+    <p class="updated">עודכן לאחרונה: 8 ביולי 2026</p>
+
+    <p>אנו בצמרת רואים חשיבות רבה במתן שירות שוויוני לכלל הגולשים, ופועלים כדי שאתר זה יהיה נגיש לאנשים עם מוגבלות, בהתאם לחוק שוויון זכויות לאנשים עם מוגבלות, התשנ"ח־1998, ולתקנות שהותקנו מכוחו.</p>
+
+    <h2>רמת הנגישות באתר</h2>
+    <p>האתר נבנה ליישם את הוראות התקן הישראלי <strong>ת"י 5568</strong> להנגשת תכנים באינטרנט, המבוסס על הנחיות <strong>WCAG 2.1 ברמת התאמה AA</strong>. הנגישות מיושמת בקוד המקור עצמו — לא באמצעות תוסף או "שכבת־על".</p>
+
+    <h2>מה הונגש באתר</h2>
+    <ul>
+      <li>מבנה סמנטי תקין (כותרות היררכיות, אזורי ניווט <span dir="ltr">nav / main / footer</span>) לזיהוי נכון בקוראי מסך.</li>
+      <li>ניווט וביצוע כל הפעולות באמצעות מקלדת בלבד, כולל קישור "דלג לתוכן" וסימון פוקוס נראה לעין.</li>
+      <li>חלונות קופצים (טופס יצירת קשר) עם תיוג <span dir="ltr">role="dialog"</span>, ניהול פוקוס ומלכודת מקלדת, וסגירה במקש <span dir="ltr">Esc</span>.</li>
+      <li>תוויות מפורשות לכל שדות הטופס, והודעות מצב בזמן אמת (<span dir="ltr">aria-live</span>).</li>
+      <li>יחס ניגודיות תקני בין טקסט לרקע, וטקסט חלופי לתמונות בעלות משמעות.</li>
+      <li>סרטון ההדגמה כולל כפתור השהיה/הפעלה נגיש, ומכבד את העדפת "צמצום תנועה" של מערכת ההפעלה.</li>
+      <li>תמיכה בהעדפת <span dir="ltr">prefers-reduced-motion</span> — צמצום אנימציות למי שהגדיר זאת.</li>
+    </ul>
+
+    <h2>מגבלות ידועות</h2>
+    <p>רכיב הצ'אט המוטמע באתר מסופק על ידי צד שלישי, וייתכן שחלקים ממנו אינם נגישים במלואם. אנו פועלים לשיפור מתמיד, וכל פנייה בנושא תיבדק ותטופל.</p>
+
+    <h2>יצירת קשר בנושא נגישות</h2>
+    <p>נתקלתם בקושי בגלישה, או שיש לכם הצעה לשיפור הנגישות? נשמח לשמוע ולתקן. פנייה תיענה בהקדם.</p>
+    <div class="box">
+      <p style="margin-bottom:6px">רכז הנגישות של צמרת:</p>
+      <p style="margin:0"><a href="mailto:danielrozner11@gmail.com?subject=נגישות%20—%20צמרת">danielrozner11@gmail.com</a></p>
+    </div>
+
+    <p style="margin-top:26px"><a href="index.html">→ חזרה לעמוד הבית</a></p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">צמרת © 2026 · ניהול אגרות אוטומטי לבתי ספר לנהיגה</div>
+</footer>
+</body>
+</html>
