@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="he">
+<head>
+<meta charset="utf-8">
+<title>צמרת</title>
+<script>
+// SPA fallback: deep links under /tzameret/deck/* are handed back to the deck
+// app (which restores the path); anything else goes to the site home.
+var p = location.pathname + location.search + location.hash;
+if (p.indexOf('/tzameret/deck/') === 0) {
+  sessionStorage.setItem('os-path', p);
+  location.replace('/tzameret/deck/');
+} else {
+  location.replace('/tzameret/');
+}
+</script>
+</head>
+<body></body>
+</html>
