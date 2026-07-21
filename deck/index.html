@@ -5,6 +5,11 @@
     <link rel="icon" href="/tzameret/deck/assets/favicon-B5J45_S7.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>צמרת — הטייס האוטומטי לניהול אגרות</title>
+    <!-- Load the deck fonts up-front (not only via the JS-injected @import) so the
+         very first paint is already Rubik/Heebo — no fallback-font flash. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;900&family=Heebo:wght@400;500;700;800&display=swap" />
     <!-- SPA deep links on GitHub Pages: 404.html stores the requested path and
          sends us here; restore it before the app boots. -->
     <script>(function(){var p=sessionStorage.getItem('os-path');if(p){sessionStorage.removeItem('os-path');history.replaceState(null,'',p);}})();</script>
