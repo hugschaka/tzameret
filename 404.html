@@ -8,7 +8,7 @@
 // /tzameret/partners/* trust) are handed back to that deck app (which restores the
 // path from sessionStorage); anything else goes to the site home.
 var p = location.pathname + location.search + location.hash;
-var base = ['/tzameret/deck/', '/tzameret/partners/'].filter(function (b) { return p.indexOf(b) === 0; })[0];
+var base = ['/tzameret/deck/', '/tzameret/partners/', '/tzameret/security/'].filter(function (b) { return p.indexOf(b) === 0; })[0];
 if (base) {
   sessionStorage.setItem('os-path', p);
   location.replace(base);
