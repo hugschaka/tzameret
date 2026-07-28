@@ -4,16 +4,23 @@
 <meta charset="utf-8">
 <title>צמרת</title>
 <script>
-// SPA fallback: deep links under an open-slide deck (/tzameret/deck/* customers,
-// /tzameret/partners/* trust) are handed back to that deck app (which restores the
+// SPA fallback: deep links under an open-slide deck (/deck/* customers,
+// /partners/*, /security/*) are handed back to that deck app (which restores the
 // path from sessionStorage); anything else goes to the site home.
+//
+// The /tzameret/... forms are the pre-domain paths, from when the site was served
+// at hugschaka.github.io/tzameret/. Links sent to customers before 27/07/2026 still
+// carry them, and GitHub's redirect to the custom domain strips only the host — so
+// they arrive here as /tzameret/deck/s/... and must still resolve.
 var p = location.pathname + location.search + location.hash;
-var base = ['/tzameret/deck/', '/tzameret/partners/', '/tzameret/security/'].filter(function (b) { return p.indexOf(b) === 0; })[0];
+var legacy = '/tzameret/';
+if (p.indexOf(legacy) === 0) p = p.slice(legacy.length - 1); // /tzameret/deck/… → /deck/…
+var base = ['/deck/', '/partners/', '/security/'].filter(function (b) { return p.indexOf(b) === 0; })[0];
 if (base) {
   sessionStorage.setItem('os-path', p);
   location.replace(base);
 } else {
-  location.replace('/tzameret/');
+  location.replace('/');
 }
 </script>
 </head>
