@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/review/assets/favicon-B5J45_S7.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>open-slide</title>
+    <script type="module" crossorigin src="/review/assets/index-DVOUH5pH.js"></script>
+    <link rel="stylesheet" crossorigin href="/review/assets/index-Bju4Lk83.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  <!--tzameret-gate-->
+<style>
+  #tz-gate{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,#16304a 0%,#12263c 100%);font-family:Heebo,Assistant,system-ui,sans-serif;direction:rtl}
+  #tz-gate .card{width:min(92vw,430px);text-align:center;color:#f5faf8}
+  #tz-gate h1{margin:0 0 6px;font-size:44px;font-weight:900;letter-spacing:1px}
+  #tz-gate h1 span{color:#37b083}
+  #tz-gate p{margin:0 0 26px;font-size:16px;color:rgba(245,250,248,.72)}
+  #tz-gate input{width:100%;box-sizing:border-box;padding:15px 18px;border-radius:12px;border:1.5px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.06);color:#f5faf8;font-family:inherit;font-size:19px;text-align:center;outline:none}
+  #tz-gate input:focus{border-color:#37b083}
+  #tz-gate button{margin-top:14px;width:100%;padding:15px;border:none;border-radius:12px;cursor:pointer;
+    background:linear-gradient(90deg,#178a72,#37b083);color:#fff;font-family:inherit;font-size:18px;font-weight:800}
+  #tz-gate .err{margin-top:14px;font-size:15px;color:#ffb4a2;min-height:20px}
+  #tz-gate.shake{animation:tzshake .4s}
+  @keyframes tzshake{25%{transform:translateX(-9px)}75%{transform:translateX(9px)}}
+</style>
+<div id="tz-gate">
+  <div class="card">
+    <h1>צמרת<span>.</span></h1>
+    <p>המצגת מוגנת בקוד גישה</p>
+    <input id="tz-pass" type="password" autocomplete="off" autofocus placeholder="קוד גישה">
+    <button id="tz-go" type="button">כניסה</button>
+    <div class="err" id="tz-err"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var WANT = "a06d87417611c99d470c8d489dfe9a316509571a6c57088dab812c078bbe039f", KEY = 'tz-deck-ok';
+  var el = document.getElementById('tz-gate');
+  function open(){ el.remove(); document.documentElement.style.overflow=''; }
+  try { if (localStorage.getItem(KEY) === WANT) { open(); return; } } catch(e){}
+  document.documentElement.style.overflow = 'hidden';
+  function sha(t){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(function(b){
+      return [].map.call(new Uint8Array(b), function(x){ return x.toString(16).padStart(2,'0'); }).join('');
+    });
+  }
+  function submit(){
+    var v = document.getElementById('tz-pass').value.trim();
+    sha(v).then(function(h){
+      if (h === WANT) { try { localStorage.setItem(KEY, WANT); } catch(e){} open(); }
+      else {
+        document.getElementById('tz-err').textContent = 'קוד שגוי';
+        el.classList.remove('shake'); void el.offsetWidth; el.classList.add('shake');
+        document.getElementById('tz-pass').select();
+      }
+    });
+  }
+  document.getElementById('tz-go').addEventListener('click', submit);
+  document.getElementById('tz-pass').addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
+})();
+</script>
+</body>
+</html>
