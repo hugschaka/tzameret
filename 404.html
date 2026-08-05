@@ -15,7 +15,7 @@
 var p = location.pathname + location.search + location.hash;
 var legacy = '/tzameret/';
 if (p.indexOf(legacy) === 0) p = p.slice(legacy.length - 1); // /tzameret/deck/… → /deck/…
-var base = ['/deck/', '/partners/', '/security/', '/review/'].filter(function (b) { return p.indexOf(b) === 0; })[0];
+var base = ['/deck/', '/partners/', '/security/', '/review/', '/festival/'].filter(function (b) { return p.indexOf(b) === 0; })[0];
 if (base) {
   sessionStorage.setItem('os-path', p);
   location.replace(base);
