@@ -28,6 +28,9 @@
   .hero h1 { font-size: clamp(26px, 6vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
   .hero p.sub { font-size: clamp(16px, 4vw, 19px); opacity: .92; max-width: 560px; margin: 0 auto; font-weight: 300; }
   .hero p.sub b { font-weight: 700; }
+  .free-chip { display: inline-block; margin-top: 16px; background: #fff; color: var(--primary-dark);
+    border-radius: 999px; padding: 9px 22px; font-size: clamp(15px, 4vw, 17px); font-weight: 800;
+    box-shadow: 0 4px 18px rgba(0,0,0,.18); }
 
   .spots { max-width: 560px; margin: -60px auto 0; padding: 0 20px; }
   .spots-card { background: #fff; border-radius: 16px; box-shadow: 0 10px 40px rgba(21,48,77,.18); padding: 18px 22px; text-align: center; }
@@ -37,11 +40,23 @@
   .spots-card .note { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
   .wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px 60px; }
-  .points { display: grid; gap: 12px; margin: 22px 0 30px; }
-  .point { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+  /* Flat rows on purpose — boxed cards read as buttons and people tap them. */
+  .points { margin: 22px 0 30px; }
+  .point { padding: 16px 4px; display: flex; gap: 12px; align-items: flex-start; border-bottom: 1px solid var(--line); }
+  .point:last-child { border-bottom: none; }
   .point .ico { font-size: 20px; line-height: 1.3; }
   .point b { display: block; margin-bottom: 2px; }
   .point span { font-size: 14.5px; color: var(--muted); }
+  /* The founders row is the pitch — emphasized and gently pulsing. */
+  .point.founders { border: 2px solid var(--accent); border-radius: 12px; background: #f0faf7;
+    padding: 16px; margin-top: 14px; animation: founders-pulse 2.2s ease-in-out infinite; }
+  .point.founders b { color: var(--primary-dark); font-size: 16.5px; }
+  .point.founders span { color: var(--ink); }
+  @keyframes founders-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(23,138,114,.35); }
+    50%      { box-shadow: 0 0 0 9px rgba(23,138,114,0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .point.founders { animation: none; } }
 
   .form-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px 20px; box-shadow: 0 4px 24px rgba(21,48,77,.07); }
   .form-card h2 { font-size: 21px; margin-bottom: 4px; }
@@ -78,7 +93,8 @@
 <div class="hero">
   <div class="badge">🚀 מחזור ראשון · קבוצת החלוץ</div>
   <h1>העוזרת האישית של מנהל<br>בית הספר לנהיגה</h1>
-  <p class="sub">צמרת מטפלת בשגרה מול ברוש — קליטת תלמידים, אגרות, הודעות ותשלומים — <b>ואתם מנהלים מהנייד.</b> חינם לתקופת הניסיון, בלי התחייבות.</p>
+  <p class="sub">צמרת מטפלת בשגרה מול ברוש — קליטת תלמידים, אגרות, הודעות ותשלומים — <b>ואתם מנהלים מהנייד.</b></p>
+  <div class="free-chip">חינם לתקופת הניסיון · בלי התחייבות</div>
 </div>
 
 <div class="spots">
@@ -91,10 +107,10 @@
 
 <div class="wrap">
   <div class="points">
-    <div class="point"><div class="ico">💸</div><div><b>חינם להצטרפות. באמת.</b><span>ללא דמי הקמה, ללא מנוי חודשי, ללא מינימום פעולות. משלמים רק על פעולה שבוצעה — 30% פחות מהמקובל בשוק.</span></div></div>
-    <div class="point"><div class="ico">🔗</div><div><b>עובד עם מה שיש לכם</b><span>יש תוכנת ניהול? צמרת משתלבת לצידה. אין? צמרת מספיקה. ההתחברות לברוש נעשית בהרשאות שלכם, מהמחשב שלכם.</span></div></div>
-    <div class="point"><div class="ico">📱</div><div><b>הכל מהנייד</b><span>סטטוס תלמידים, תשלומים שנקלטו והתראות — בטלפון של המנהל, גם כשמשרד סגור.</span></div></div>
-    <div class="point"><div class="ico">🔒</div><div><b>תעריף מייסדים</b><span>מי שמצטרף במחזור הראשון — התעריף שלו נעול לתמיד, גם כשהמחיר יעלה.</span></div></div>
+    <div class="point"><div class="ico">💸</div><div><b>חינם להצטרפות</b><span>ללא דמי הקמה, ללא מנוי חודשי, ללא מינימום פעולות. משלמים רק על פעולה שבוצעה — 30% פחות מהמקובל בשוק.</span></div></div>
+    <div class="point"><div class="ico">🔗</div><div><b>עובד עם מה שיש לכם</b><span>יש תוכנת ניהול? צמרת משתלבת לצידה. אין? צמרת מספקת את כל המעטפת. ההתחברות לברוש נעשית בהרשאה שלכם מהמחשב — וכל השאר מתנהל אצלכם ביד.</span></div></div>
+    <div class="point"><div class="ico">📱</div><div><b>ולאחר ההתחברות מהמחשב — הכל מהנייד</b><span>סטטוס תלמידים, תשלומים שנקלטו והתראות — בטלפון של המנהל, גם כשהמשרד סגור.</span></div></div>
+    <div class="point founders"><div class="ico">🔒</div><div><b>תעריף מייסדים — ננעל לצמיתות</b><span>מי שמצטרף במחזור הראשון, התעריף שלו נעול לתמיד — גם כשהמחיר יעלה. רק ל-30 בתי הספר הראשונים.</span></div></div>
   </div>
 
   <div class="form-card" id="form-card">
@@ -125,7 +141,7 @@
   <div class="done" id="done">
     <div class="big">🎉</div>
     <h2>המקום שלכם שמור!</h2>
-    <p>נחזור אליכם תוך יום עסקים לתיאום ההקמה.<br>המחזור הראשון יוצא לדרך בקרוב.</p>
+    <p>שלחנו לכם אישור ב-SMS. נחזור אליכם תוך יום עסקים<br>לתיאום הקמה קצרה מול המחשב של בית הספר —<br>ומשם הכל מתנהל מהנייד.</p>
   </div>
 </div>
 
