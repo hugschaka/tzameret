@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>צמרת — קבוצת החלוץ | הרשמה למחזור הראשון</title>
+<meta name="description" content="הצטרפו למחזור הראשון של צמרת: תפעול AI ניהולי לבית הספר לנהיגה, חינם לתקופת הניסיון. תעריף מייסדים ננעל ל-30 הראשונים.">
+<link rel="icon" href="../icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1f3a5f;
+    --primary-dark: #15304d;
+    --primary-light: #eaeff5;
+    --accent: #178a72;
+    --ink: #1f2937;
+    --muted: #6b7280;
+    --line: #e5e7eb;
+    --bg: #f8fafc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Heebo', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+
+  .hero { background: linear-gradient(160deg, var(--primary-dark), var(--primary)); color: #fff; padding: 40px 20px 90px; text-align: center; }
+  .badge { display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 6px 16px; font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(26px, 6vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
+  .hero p.sub { font-size: clamp(16px, 4vw, 19px); opacity: .92; max-width: 560px; margin: 0 auto; font-weight: 300; }
+  .hero p.sub b { font-weight: 700; }
+
+  .spots { max-width: 560px; margin: -60px auto 0; padding: 0 20px; }
+  .spots-card { background: #fff; border-radius: 16px; box-shadow: 0 10px 40px rgba(21,48,77,.18); padding: 18px 22px; text-align: center; }
+  .spots-card .nums { font-size: 17px; font-weight: 700; color: var(--primary); }
+  .spots-card .bar { height: 8px; background: var(--primary-light); border-radius: 99px; margin-top: 10px; overflow: hidden; }
+  .spots-card .fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), #37b083); border-radius: 99px; transition: width .8s ease; }
+  .spots-card .note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  .wrap { max-width: 560px; margin: 0 auto; padding: 28px 20px 60px; }
+  .points { display: grid; gap: 12px; margin: 22px 0 30px; }
+  .point { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: flex; gap: 12px; align-items: flex-start; }
+  .point .ico { font-size: 20px; line-height: 1.3; }
+  .point b { display: block; margin-bottom: 2px; }
+  .point span { font-size: 14.5px; color: var(--muted); }
+
+  .form-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 24px 20px; box-shadow: 0 4px 24px rgba(21,48,77,.07); }
+  .form-card h2 { font-size: 21px; margin-bottom: 4px; }
+  .form-card .privacy { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 14px 0 5px; }
+  input[type=text], input[type=tel], input[type=email] {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px;
+    font-family: inherit; font-size: 16px; background: var(--bg);
+  }
+  input:focus { outline: 2px solid var(--primary); outline-offset: 1px; background: #fff; }
+  .sw { display: grid; gap: 8px; margin-top: 6px; }
+  .sw label.opt { display: flex; align-items: center; gap: 10px; font-weight: 400; margin: 0; border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; cursor: pointer; background: var(--bg); }
+  .sw label.opt:has(input:checked) { border-color: var(--primary); background: var(--primary-light); }
+  .sw input[type=radio] { accent-color: var(--primary); width: 18px; height: 18px; }
+  #software-name { display: none; margin-top: 8px; }
+
+  button.cta { width: 100%; margin-top: 22px; padding: 15px; border: none; border-radius: 12px;
+    background: var(--accent); color: #fff; font-family: inherit; font-size: 18px; font-weight: 700; cursor: pointer; }
+  button.cta:active { transform: translateY(1px); }
+  button.cta:disabled { opacity: .6; cursor: wait; }
+  .err { color: #a3261a; font-size: 14px; margin-top: 10px; min-height: 20px; }
+
+  .done { text-align: center; padding: 40px 10px; display: none; }
+  .done .big { font-size: 52px; }
+  .done h2 { margin: 8px 0; }
+  .done p { color: var(--muted); }
+
+  footer { text-align: center; padding: 26px 20px 40px; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--primary); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">🚀 מחזור ראשון · קבוצת החלוץ</div>
+  <h1>העוזרת האישית של מנהל<br>בית הספר לנהיגה</h1>
+  <p class="sub">צמרת מטפלת בשגרה מול ברוש — קליטת תלמידים, אגרות, הודעות ותשלומים — <b>ואתם מנהלים מהנייד.</b> חינם לתקופת הניסיון, בלי התחייבות.</p>
+</div>
+
+<div class="spots">
+  <div class="spots-card">
+    <div class="nums" id="spots-line">בודק מקומות פנויים…</div>
+    <div class="bar"><div class="fill" id="spots-fill"></div></div>
+    <div class="note">תעריף המייסדים ננעל לצמיתות — רק ל-30 בתי הספר הראשונים</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="points">
+    <div class="point"><div class="ico">💸</div><div><b>חינם להצטרפות. באמת.</b><span>ללא דמי הקמה, ללא מנוי חודשי, ללא מינימום פעולות. משלמים רק על פעולה שבוצעה — 30% פחות מהמקובל בשוק.</span></div></div>
+    <div class="point"><div class="ico">🔗</div><div><b>עובד עם מה שיש לכם</b><span>יש תוכנת ניהול? צמרת משתלבת לצידה. אין? צמרת מספיקה. ההתחברות לברוש נעשית בהרשאות שלכם, מהמחשב שלכם.</span></div></div>
+    <div class="point"><div class="ico">📱</div><div><b>הכל מהנייד</b><span>סטטוס תלמידים, תשלומים שנקלטו והתראות — בטלפון של המנהל, גם כשמשרד סגור.</span></div></div>
+    <div class="point"><div class="ico">🔒</div><div><b>תעריף מייסדים</b><span>מי שמצטרף במחזור הראשון — התעריף שלו נעול לתמיד, גם כשהמחיר יעלה.</span></div></div>
+  </div>
+
+  <div class="form-card" id="form-card">
+    <h2>שריינו מקום במחזור הראשון</h2>
+    <div class="privacy">✍️ הפרטים נשמרים כדי שנוכל לחזור אליך.</div>
+    <form id="f" novalidate>
+      <label for="school">שם בית הספר</label>
+      <input type="text" id="school" name="school" autocomplete="organization">
+      <label for="city">עיר</label>
+      <input type="text" id="city" name="city" autocomplete="address-level2">
+      <label for="manager">שם המנהל/ת</label>
+      <input type="text" id="manager" name="manager" autocomplete="name">
+      <label for="phone">טלפון נייד</label>
+      <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel">
+      <label for="email">אימייל</label>
+      <input type="email" id="email" name="email" inputmode="email" autocomplete="email">
+      <label>איך אתם עובדים היום?</label>
+      <div class="sw">
+        <label class="opt"><input type="radio" name="sw" value="none" checked> עובדים ללא תוכנת ניהול</label>
+        <label class="opt"><input type="radio" name="sw" value="named"> עובדים עם תוכנה של:</label>
+        <input type="text" id="software-name" placeholder="שם התוכנה">
+      </div>
+      <button class="cta" id="submit-btn" type="submit">שריינו לי מקום 🚀</button>
+      <div class="err" id="err"></div>
+    </form>
+  </div>
+
+  <div class="done" id="done">
+    <div class="big">🎉</div>
+    <h2>המקום שלכם שמור!</h2>
+    <p>נחזור אליכם תוך יום עסקים לתיאום ההקמה.<br>המחזור הראשון יוצא לדרך בקרוב.</p>
+  </div>
+</div>
+
+<footer>
+  צמרת · הטייס האוטומטי לניהול אגרות · <a href="https://top-tzameret.com">top-tzameret.com</a><br>
+  השירות תלוי בזמינות מערכת ברוש; ייתכנו הפסקות זמניות.
+</footer>
+
+<script>
+(function () {
+  var API = 'https://api.top-tzameret.com/api/pilot';
+
+  // A meaningless random session id — the ONLY identifier analytics events carry,
+  // and the key that lets a half-typed form survive a refresh.
+  var sid;
+  try {
+    sid = localStorage.getItem('tz-pilot-sid');
+    if (!sid) {
+      sid = 'p-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12);
+      localStorage.setItem('tz-pilot-sid', sid);
+    }
+  } catch (e) { sid = 'p-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 12); }
+
+  var qs = new URLSearchParams(location.search);
+  var utm = { utm_source: qs.get('utm_source') || '', utm_campaign: qs.get('utm_campaign') || '' };
+
+  function post(path, body) {
+    body.sid = sid; body.utm_source = utm.utm_source; body.utm_campaign = utm.utm_campaign;
+    return fetch(API + path, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
+    }).then(function (r) { return r.json(); });
+  }
+  function event(type, field) { post('/event', { type: type, field: field || null }).catch(function () {}); }
+
+  event('page_view');
+
+  // Spots meter — live from the server; hide the card on failure rather than lie.
+  fetch(API + '/spots').then(function (r) { return r.json(); }).then(function (s) {
+    if (!s.ok) return;
+    document.getElementById('spots-line').textContent =
+      s.left > 0 ? 'נותרו ' + s.left + ' מקומות מתוך ' + s.total : 'המחזור הראשון התמלא — הרשמה לרשימת המתנה';
+    document.getElementById('spots-fill').style.width = Math.min(100, Math.round(100 * s.taken / s.total)) + '%';
+  }).catch(function () { document.getElementById('spots-line').textContent = 'מספר המקומות מוגבל — 30 בתי ספר'; });
+
+  var f = document.getElementById('f');
+  var fields = ['school', 'city', 'manager', 'phone', 'email'];
+  var started = false;      // nothing is saved before the first real keystroke
+  var saveTimer = null;
+
+  function currentData(done) {
+    var swNamed = f.sw.value === 'named';
+    return {
+      school: f.school.value, city: f.city.value, manager: f.manager.value,
+      phone: f.phone.value, email: f.email.value,
+      software: swNamed ? (document.getElementById('software-name').value || 'תוכנה (לא צוין שם)') : '',
+      done: done === true
+    };
+  }
+  function scheduleSave() {
+    if (!started) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { post('/save', currentData(false)).catch(function () {}); }, 1200);
+  }
+
+  fields.forEach(function (id) {
+    var el = document.getElementById(id);
+    var touched = false;
+    el.addEventListener('input', function () {
+      if (!started) { started = true; }
+      if (!touched) { touched = true; event('field_start', id); }
+      scheduleSave();
+    });
+    el.addEventListener('blur', function () {
+      if (touched && !el.value.trim()) event('field_abandon', id);
+    });
+  });
+  Array.prototype.forEach.call(f.sw, function (r) {
+    r.addEventListener('change', function () {
+      document.getElementById('software-name').style.display = f.sw.value === 'named' ? 'block' : 'none';
+      started = true; scheduleSave();
+    });
+  });
+  document.getElementById('software-name').addEventListener('input', function () { started = true; scheduleSave(); });
+
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = document.getElementById('err');
+    err.textContent = '';
+    var d = currentData(true);
+    if (!d.school.trim()) { err.textContent = 'איך קוראים לבית הספר?'; return; }
+    if (d.phone.replace(/\D/g, '').length < 9) { err.textContent = 'צריך מספר טלפון תקין כדי שנחזור אליכם.'; return; }
+    var btn = document.getElementById('submit-btn');
+    btn.disabled = true; btn.textContent = 'שומר…';
+    event('submit');
+    post('/save', d).then(function (r) {
+      if (r.ok) {
+        document.getElementById('form-card').style.display = 'none';
+        var doneEl = document.getElementById('done');
+        doneEl.style.display = 'block';
+        doneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        err.textContent = r.error || 'משהו השתבש — נסו שוב.';
+        btn.disabled = false; btn.textContent = 'שריינו לי מקום 🚀';
+      }
+    }).catch(function () {
+      err.textContent = 'אין חיבור לשרת כרגע — נסו שוב בעוד רגע.';
+      btn.disabled = false; btn.textContent = 'שריינו לי מקום 🚀';
+    });
+  });
+})();
+</script>
+</body>
+</html>
