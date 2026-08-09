@@ -23,14 +23,22 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Heebo', sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
 
-  .hero { background: linear-gradient(160deg, var(--primary-dark), var(--primary)); color: #fff; padding: 40px 20px 90px; text-align: center; }
-  .badge { display: inline-block; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); border-radius: 999px; padding: 6px 16px; font-size: 14px; font-weight: 600; margin-bottom: 18px; }
+  .hero { background: linear-gradient(160deg, var(--primary-dark), var(--primary)); color: #fff; padding: 26px 20px 90px; text-align: center; }
+  .logo-tile { display: inline-grid; place-items: center; background: #fff; border-radius: 14px; padding: 8px 12px; margin-bottom: 14px; }
   .hero h1 { font-size: clamp(26px, 6vw, 40px); font-weight: 800; line-height: 1.25; margin-bottom: 12px; }
   .hero p.sub { font-size: clamp(16px, 4vw, 19px); opacity: .92; max-width: 560px; margin: 0 auto; font-weight: 300; }
   .hero p.sub b { font-weight: 700; }
-  .free-chip { display: inline-block; margin-top: 16px; background: #fff; color: var(--primary-dark);
-    border-radius: 999px; padding: 9px 22px; font-size: clamp(15px, 4vw, 17px); font-weight: 800;
-    box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+  /* One shared pulsing box: cohort line + free line (Daniel: no emojis, both blink). */
+  .pulse-chip { display: inline-block; margin-top: 18px; background: #fff; color: var(--primary-dark);
+    border-radius: 14px; padding: 12px 26px; box-shadow: 0 4px 18px rgba(0,0,0,.18);
+    animation: chip-pulse 2.2s ease-in-out infinite; }
+  .pulse-chip .l1 { font-size: clamp(14px, 3.6vw, 16px); font-weight: 700; color: var(--accent); }
+  .pulse-chip .l2 { font-size: clamp(16px, 4.2vw, 19px); font-weight: 800; margin-top: 2px; }
+  @keyframes chip-pulse {
+    0%, 100% { transform: scale(1);    box-shadow: 0 4px 18px rgba(0,0,0,.18); }
+    50%      { transform: scale(1.04); box-shadow: 0 6px 26px rgba(0,0,0,.3); }
+  }
+  @media (prefers-reduced-motion: reduce) { .pulse-chip { animation: none; } }
 
   .spots { max-width: 560px; margin: -60px auto 0; padding: 0 20px; }
   .spots-card { background: #fff; border-radius: 16px; box-shadow: 0 10px 40px rgba(21,48,77,.18); padding: 18px 22px; text-align: center; }
@@ -91,10 +99,13 @@
 <body>
 
 <div class="hero">
-  <div class="badge">🚀 מחזור ראשון · קבוצת החלוץ</div>
+  <div class="logo-tile"><img src="../logo.svg" alt="צמרת" width="72" height="50"></div>
   <h1>העוזרת האישית של מנהל<br>בית הספר לנהיגה</h1>
   <p class="sub">צמרת מטפלת בשגרה מול ברוש — קליטת תלמידים, אגרות, הודעות ותשלומים — <b>ואתם מנהלים מהנייד.</b></p>
-  <div class="free-chip">חינם לתקופת הניסיון · בלי התחייבות</div>
+  <div class="pulse-chip">
+    <div class="l1">מחזור ראשון · קבוצת החלוץ</div>
+    <div class="l2">חינם לתקופת הניסיון · בלי התחייבות</div>
+  </div>
 </div>
 
 <div class="spots">
@@ -133,7 +144,7 @@
         <label class="opt"><input type="radio" name="sw" value="named"> עובדים עם תוכנה של:</label>
         <input type="text" id="software-name" placeholder="שם התוכנה">
       </div>
-      <button class="cta" id="submit-btn" type="submit">שריינו לי מקום 🚀</button>
+      <button class="cta" id="submit-btn" type="submit">שריינו לי מקום</button>
       <div class="err" id="err"></div>
     </form>
   </div>
@@ -244,11 +255,11 @@
         doneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         err.textContent = r.error || 'משהו השתבש — נסו שוב.';
-        btn.disabled = false; btn.textContent = 'שריינו לי מקום 🚀';
+        btn.disabled = false; btn.textContent = 'שריינו לי מקום';
       }
     }).catch(function () {
       err.textContent = 'אין חיבור לשרת כרגע — נסו שוב בעוד רגע.';
-      btn.disabled = false; btn.textContent = 'שריינו לי מקום 🚀';
+      btn.disabled = false; btn.textContent = 'שריינו לי מקום';
     });
   });
 })();
