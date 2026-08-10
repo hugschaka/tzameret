@@ -145,7 +145,7 @@
         <label class="opt"><input type="radio" name="sw" value="named"> עובדים עם תוכנה של:</label>
         <input type="text" id="software-name" placeholder="שם התוכנה">
       </div>
-      <button class="cta" id="submit-btn" type="submit">שריינו לי מקום</button>
+      <button class="cta" id="submit-btn" type="submit">שמרו לי מקום, חזרו אליי</button>
       <div class="err" id="err"></div>
     </form>
   </div>
@@ -256,11 +256,11 @@
         doneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       } else {
         err.textContent = r.error || 'משהו השתבש — נסו שוב.';
-        btn.disabled = false; btn.textContent = 'שריינו לי מקום';
+        btn.disabled = false; btn.textContent = 'שמרו לי מקום, חזרו אליי';
       }
     }).catch(function () {
       err.textContent = 'אין חיבור לשרת כרגע — נסו שוב בעוד רגע.';
-      btn.disabled = false; btn.textContent = 'שריינו לי מקום';
+      btn.disabled = false; btn.textContent = 'שמרו לי מקום, חזרו אליי';
     });
   });
 })();
